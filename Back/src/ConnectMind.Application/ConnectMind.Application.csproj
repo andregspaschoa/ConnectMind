@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConnectMind.Domain\ConnectMind.Domain.csproj" />
+    <ProjectReference Include="..\ConnectMind.Persistence\ConnectMind.Persistence.csproj" />
+  </ItemGroup>  
+
+</Project>

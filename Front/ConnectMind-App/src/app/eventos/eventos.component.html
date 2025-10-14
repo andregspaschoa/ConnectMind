@@ -4,67 +4,55 @@
 <div class="form-inline">
   <div class="form-group mb-2">
     <label class="mr-2">Filtro: </label>
-    <input
-    type="text"
-    class="form-control mr-2"
-    placeholder="buscar"
-    [(ngModel)]="filterList">
+    <input type="text" class="form-control mr-2" placeholder="buscar" [(ngModel)]="filterList">
   </div>
 </div>
-<table class="table table-striped" style="width: 100%; overflow-x: auto; overflow-y: auto;">
-  <thead class="thead-dark">
-    <tr>
-      <th>
-        <button
-        type="button" class="btn btn-outline-light btn-sm"
-        (click)="showOrHideImg()"
-        >{{!exibirImagem ? 'Exibir' : 'Ocultar'}}
-      </button>
-      </th>
-      <th>#</th>
-      <th>Tema</th>
-      <th>Local</th>
-      <th>Data</th>
-      <th>Qtd Pessoas</th>
-      <th>Lote</th>
-      <th>Opções</th>
-    </tr>
-  </thead>
-  <tbody *ngIf="eventos && eventos.length">
-    <tr *ngFor="let evento of eventosFiltrados">
-      <td>
-        <img [collapse]="!exibirImagem"
-        [isAnimated]="true"
-        src="/assets/{{evento.imageURL}}"
-        [style.width.px]="widthImg"
-        [style.margin.px]="marginImg"
-        alt="{{evento.tema}}"
-        title="{{evento.tema}}">
-      </td>
-      <td><b>{{evento.eventoId}}</b></td>
-      <td>{{evento.tema}}</td>
-      <td>{{evento.local}}</td>
-      <td>{{evento.dataEvento}}</td>
-      <td>{{evento.qtdPessoas}}</td>
-      <td>{{evento.lote}}</td>
-      <td>
-        <button
-          type="button" class="btn btn-primary btn-sm mr-2"
-          > <i class="fas fa-edit"></i>
-        </button>
-        <button
-          type="button" class="btn btn-danger btn-sm"
-          > <i class="fas fa-trash-alt"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-  <tfoot *ngIf="!eventos.length">
-    <tr>
-      <td colspan="8" class="text-center">
-        <h4>Nenhum evento encontrado!</h4>
-      </td>
-    </tr>
-  </tfoot>
-</table>
-
+<div class="table-responsive">
+  <table class="table table-striped" style="width: 100%; overflow-x: auto; overflow-y: auto;">
+    <thead class="thead-dark">
+      <tr>
+        <th>
+          <button type="button" class="btn btn-outline-light btn-sm" (click)="showOrHideImg()">
+            <span *ngIf="!exibirImagem"><i class="fas fa-eye"> </i></span>
+            <span *ngIf="exibirImagem"><i class="fas fa-eye-slash"> </i></span>
+            <!--{{!exibirImagem ? 'Exibir' : 'Ocultar'}}-->
+          </button>
+        </th>
+        <th>#</th>
+        <th>Tema</th>
+        <th>Local</th>
+        <th>Data</th>
+        <th>Qtd Pessoas</th>
+        <th>Lote</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="eventos && eventos.length">
+      <tr *ngFor="let evento of eventosFiltrados">
+        <td>
+          <img [collapse]="!exibirImagem" [isAnimated]="true" src="/assets/{{evento.imageURL}}"
+            [style.width.px]="widthImg" [style.margin.px]="marginImg" alt="{{evento.tema}}" title="{{evento.tema}}">
+        </td>
+        <td><b>{{evento.eventoId}}</b></td>
+        <td>{{evento.tema}}</td>
+        <td>{{evento.local}}</td>
+        <td>{{evento.dataEvento}}</td>
+        <td>{{evento.qtdPessoas}}</td>
+        <td>{{evento.lote}}</td>
+        <td>
+          <button type="button" class="btn btn-primary btn-sm mr-2"> <i class="fas fa-edit"></i>
+          </button>
+          <button type="button" class="btn btn-danger btn-sm"> <i class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="!eventos.length">
+      <tr>
+        <td colspan="8" class="text-center">
+          <h4>Nenhum evento encontrado!</h4>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
