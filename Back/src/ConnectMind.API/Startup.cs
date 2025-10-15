@@ -30,7 +30,10 @@ namespace ConnectMind.API
                 {
                     context.UseSqlite(Configuration.GetConnectionString("Default"));
                 });
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson( 
+                    opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                ); // Evitar loop na serialização
 
             services.AddScoped<IEventoService, EventoService>();
             services.AddScoped<IGeralPersist, GeralPersist>();
