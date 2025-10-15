@@ -505,3 +505,6 @@ Thumbs.db
 *.db
 *.db-shm
 *.db-wal
+
+# Excluindo ConnectMind.db
+ConnectMind.db
