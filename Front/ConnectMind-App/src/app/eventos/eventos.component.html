@@ -12,7 +12,7 @@
     <thead class="thead-dark">
       <tr>
         <th>
-          <button type="button" class="btn btn-outline-light btn-sm" (click)="showOrHideImg()">
+          <button type="button" class="btn btn-outline-light btn-sm" (click)="alterarImagem()">
             <span *ngIf="!exibirImagem"><i class="fas fa-eye"> </i></span>
             <span *ngIf="exibirImagem"><i class="fas fa-eye-slash"> </i></span>
             <!--{{!exibirImagem ? 'Exibir' : 'Ocultar'}}-->
@@ -38,7 +38,7 @@
         <td>{{evento.local}}</td>
         <td>{{evento.dataEvento}}</td>
         <td>{{evento.qtdPessoas}}</td>
-        <td>{{evento.lote}}</td>
+        <td>{{evento.lotes}}</td>
         <td>
           <button type="button" class="btn btn-primary btn-sm mr-2"> <i class="fas fa-edit"></i>
           </button>
