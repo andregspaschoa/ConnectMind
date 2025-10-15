@@ -12,12 +12,14 @@ import { NavComponent } from './nav/nav.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
 import { EventoService } from './services/evento.service';
+import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
       EventosComponent,
       PalestrantesComponent,
+      DateTimeFormatPipe,
       NavComponent
    ],
   imports: [
