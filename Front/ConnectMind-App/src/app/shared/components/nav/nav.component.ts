@@ -11,7 +11,14 @@ export class NavComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit():void {
   }
 
+  showMenu():boolean {
+    const currentUrl = window.location.href;
+    if (currentUrl.includes('/user/login') || currentUrl.includes('/user/registration')) {
+      return false;
+    }
+    return true;
+  }
 }
