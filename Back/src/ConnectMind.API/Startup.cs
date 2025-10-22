@@ -1,3 +1,4 @@
+using System;
 using ConnectMind.Application;
 using ConnectMind.Application.Contratos;
 using ConnectMind.Persistence;
@@ -31,9 +32,11 @@ namespace ConnectMind.API
                     context.UseSqlite(Configuration.GetConnectionString("Default"));
                 });
             services.AddControllers()
-                .AddNewtonsoftJson( 
+                .AddNewtonsoftJson(
                     opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 ); // Evitar loop na serialização
+                
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());    
 
             services.AddScoped<IEventoService, EventoService>();
             services.AddScoped<IGeralPersist, GeralPersist>();

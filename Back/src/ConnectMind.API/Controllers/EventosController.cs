@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ConnectMind.Domain;
+﻿using ConnectMind.Domain;
 using Microsoft.AspNetCore.Mvc;
 using ConnectMind.Persistence.Contextos;
 using ConnectMind.Application.Contratos;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;
+using ConnectMind.Application.Dtos;
 
 namespace ConnectMind.API.Controllers
 {
@@ -27,7 +26,7 @@ namespace ConnectMind.API.Controllers
             try
             {
                  var eventos = await _eventoService.GetAllEventosAsync(true);
-                 if (eventos == null) return NotFound("Nenhum evento encontrado.");
+                if (eventos == null) return NotFound("Nenhum evento encontrado.");
 
                  return Ok(eventos);
             }
@@ -77,7 +76,7 @@ namespace ConnectMind.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Evento model)
+        public async Task<IActionResult> Post(EventoDto model)
         {
             try
             {
@@ -95,7 +94,7 @@ namespace ConnectMind.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Evento model)
+        public async Task<IActionResult> Put(int id, EventoDto model)
         {
             try
             {
