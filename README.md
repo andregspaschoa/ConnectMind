@@ -66,7 +66,7 @@ dotnet ef database update
 
 #### 2.4. Execute a aplicação:
 ```bash
-dotnet run --watch
+dotnet watch run
 ```
 
 A API estará disponível em:

@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ConnectMind.Domain
 {
+    //[Table("Eventos")] Apenas para saber que é possível renomear a tabela no banco
     public class Evento
     {
         public int Id { get; set; }   
@@ -13,6 +14,7 @@ namespace ConnectMind.Domain
 
         public DateTime? DataEvento { get; set; }
 
+        [Required]
         public string Tema { get; set; }
 
         public int QtdPessoas { get; set; }

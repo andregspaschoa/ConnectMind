@@ -26,7 +26,7 @@ namespace ConnectMind.API.Controllers
             try
             {
                  var eventos = await _eventoService.GetAllEventosAsync(true);
-                if (eventos == null) return NotFound("Nenhum evento encontrado.");
+                if (eventos == null) return NoContent();
 
                  return Ok(eventos);
             }
@@ -44,7 +44,7 @@ namespace ConnectMind.API.Controllers
             try
             {
                  var evento = await _eventoService.GetEventoByIdAsync(id, true);
-                 if (evento == null) return NotFound("Nenhum evento por id encontrado.");
+                 if (evento == null) return NoContent();
 
                  return Ok(evento);
             }
@@ -81,7 +81,7 @@ namespace ConnectMind.API.Controllers
             try
             {
                  var evento = await _eventoService.AddEventos(model);
-                 if (evento == null) return BadRequest("Erro ao tentar adicionar evento.");
+                 if (evento == null) return NoContent();
 
                  return Ok(evento);
             }
@@ -99,7 +99,7 @@ namespace ConnectMind.API.Controllers
             try
             {
                  var evento = await _eventoService.UpdateEvento(id, model);
-                 if (evento == null) return BadRequest("Erro ao tentar atualizar evento.");
+                 if (evento == null) return NoContent();
 
                  return Ok(evento);
             }
@@ -112,13 +112,16 @@ namespace ConnectMind.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id, Evento model)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
+                var evento = await _eventoService.GetEventoByIdAsync(id, true);
+                if (evento == null) return NoContent();
+
                 return await _eventoService.DeleteEvento(id) ?
                     Ok("Deletado") :                
-                    BadRequest("Evento não deletado");
+                    throw new Exception("Ocorreu um erro não especificado ao tentar deletar o evento.");
                 }
             catch (Exception ex)
             {
