@@ -5,6 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { Router } from '@angular/router';
 export class EventoListaComponent implements OnInit {
 
   modalRef!: BsModalRef;
+  public eventoId!: number;
+  public eventoTema!: string;
 
 
   public eventos: Evento[] = [];
@@ -51,34 +54,52 @@ export class EventoListaComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.getEventos();
+    this.carregarEventos();
   }
 
   public alterarImagem(): void {
     this.exibirImagem = !this.exibirImagem;
   }
 
-  public getEventos(): void {
-    this.eventoService.getEventos().subscribe({
-      next: (eventos: Evento[]) => {
-        this.eventos = eventos;
-        this.eventosFiltrados = this.eventos;
-      },
-      error: (error: any) => {
-        this.spinner.hide();
-        this.toastr.error('Erro ao carregar os eventos', 'Erro!');
-      },
-      complete: () => this.spinner.hide()
-    },);
+  public carregarEventos(): void {
+    this.eventoService.getEventos()
+      .pipe(finalize(() => this.spinner.hide()))
+      .subscribe({
+        next: (eventos: Evento[]) => {
+          this.eventos = eventos;
+          this.eventosFiltrados = this.eventos;
+        },
+        error: (error: any) => {
+          this.toastr.error('Erro ao carregar os eventos', 'Erro!');
+        }
+      });
   }
 
-  openModal(template: TemplateRef<any>):void {
+  openModal(event:any , template: TemplateRef<any>, eventoId: number, eventoTema: string):void {
+    event.stopPropagation();
+    this.eventoId = eventoId;
+    this.eventoTema = eventoTema;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
   confirm(): void {
     this.modalRef.hide();
-    this.toastr.success('O evento foi deletado com sucesso!', 'Deletado!');
+    this.spinner.show();
+    
+    this.eventoService.deleteEvento(this.eventoId)
+      .pipe(finalize(() => this.spinner.hide()))
+      .subscribe({
+        next: (result: any) => {
+          if(result.message === 'Deletado'){ // O mais correto seria utilizar response.status === 200
+            this.toastr.success('Evento deletado com sucesso', 'Deletado!');
+            this.carregarEventos();
+          }
+        },
+        error: (error: any) => {
+          this.toastr.error(`Erro ao deletar o evento ${this.eventoTema} de Código ${this.eventoId}`, 'Erro!');
+          console.error(error);
+        }
+      });
   }
 
   decline(): void {

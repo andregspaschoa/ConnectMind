@@ -10,6 +10,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { ToastrModule } from 'ngx-toastr';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -32,11 +35,12 @@ import { PerfilComponent } from './components/user/perfil/perfil.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
 
+defineLocale('pt-br', ptBrLocale);
 @NgModule({
   declarations: [
     AppComponent,
-      EventosComponent,
-      PalestrantesComponent,
+    EventosComponent,
+    PalestrantesComponent,
       DateTimeFormatPipe,
       NavComponent,
       PageTitleComponent,
@@ -66,7 +70,8 @@ import { RegistrationComponent } from './components/user/registration/registrati
     CollapseModule.forRoot(),
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ], // Erro não está afetando a compilação do codigo.
   providers: [EventoService],
   bootstrap: [AppComponent],

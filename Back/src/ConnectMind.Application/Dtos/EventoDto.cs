@@ -20,7 +20,7 @@ namespace ConnectMind.Application.Dtos
         public string Tema { get; set; }
 
         [Display(Name = "Qtd de Pessoas"),
-        Range(1, 1200, ErrorMessage = "O campo {0} deve ter entre {1} e {2} de pessoas.")]
+        Range(1, 120000, ErrorMessage = "O campo {0} deve ter entre {1} e {2} de pessoas.")]
         public int QtdPessoas { get; set; }       
 
         [RegularExpression(@".*\.(gif|jpe?g|bmp|png)$",

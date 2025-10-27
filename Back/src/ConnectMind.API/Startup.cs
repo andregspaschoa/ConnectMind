@@ -1,6 +1,7 @@
 using System;
 using ConnectMind.Application;
 using ConnectMind.Application.Contratos;
+using ConnectMind.Application.Helpers;
 using ConnectMind.Persistence;
 using ConnectMind.Persistence.Contextos;
 using ConnectMind.Persistence.Contratos;
@@ -32,6 +33,10 @@ namespace ConnectMind.API
                     context.UseSqlite(Configuration.GetConnectionString("Default"));
                 });
             services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter());
+                })
                 .AddNewtonsoftJson(
                     opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 ); // Evitar loop na serialização

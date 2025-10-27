@@ -12,7 +12,7 @@ namespace ConnectMind.Domain
 
         public string Local { get; set; }
 
-        public DateTime? DataEvento { get; set; }
+        public DateTime DataEvento { get; set; }
 
         [Required]
         public string Tema { get; set; }
